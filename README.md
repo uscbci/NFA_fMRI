@@ -2,12 +2,12 @@ NFA fMRI ROI Analysis Pipeline README
 
 Authors: Brock Pluimer, Jonas Kaplan, Evan Abdollahi, Grace Hughes
 
-*Overview*
+**Overview**
 
 This repository contains a collection of Python and Shell scripts for preprocessing and analyzing fMRI data for the Kaplan lab’s Narrative Free Awareness Study. The scripts constitute a preprocessing and seed-based functional connectivity analysis pipeline.
 
 
-*skullstrip.py*
+**skullstrip.py**
 
 Purpose: Performs skull stripping on T1-weighted MRI images.
 
@@ -18,7 +18,7 @@ Output: Skull-stripped images and HTML report.
 Operations: Utilizes Nibabel for NIFTI handling, NumPy for array operations, and FSL's BET for actual skull stripping. Creates a report including the applied BET command and resultant images.
 
 
-*setupfieldmaps.py*
+**setupfieldmaps.py**
 
 Purpose: Prepares fieldmap images for unwarping in FEAT.
 
@@ -29,7 +29,7 @@ Output: Skull-stripped magnitude images and phase images converted to radians.
 Operations: Utilizes FSL's bet for skull-stripping and fsl_prepare_fieldmap for phase conversion.
 
 
-*nfa_preprocess.py*
+**nfa_preprocess.py**
 
 Purpose: Master preprocessing script for the Meditation Narrative Free Awareness Study.
 
@@ -40,7 +40,7 @@ Output: Preprocessed fMRI data, log files.
 Operations: Utilizes argparse for command-line options, FSL utilities for image processing, and custom functions for lower-level analyses. Can conditionally skip steps like skull stripping, fieldmap preparation, and feature analysis.
 
 
-*nfa_ICA_AROMA.py*
+**nfa_ICA_AROMA.py**
 
 Purpose: Applies ICA-AROMA for automatic removal of motion-related artifacts in fMRI data for the Meditation Narrative Free Awareness Study.
 
@@ -49,7 +49,8 @@ Input: Subject IDs and corresponding preprocessed fMRI data stored in FEAT folde
 Output: Denoised fMRI data with motion artifacts removed, stored in new ICA_AROMA directories within the existing FEAT folders.
 
 
-*segmentation.py*
+**segmentation.py**
+
 Purpose: Performs tissue segmentation on T1-weighted MRI images for the Meditation Narrative Free Awareness Study.
 
 Input: Subject IDs, T1-weighted skull-stripped MRI images.
@@ -59,7 +60,8 @@ Output: Segmented brain tissues (Grey Matter, White Matter, CSF) stored in speci
 Operations: Utilizes argparse for command-line arguments, subprocess for executing shell commands. Employs FSL's fast for the segmentation process, targeting Grey Matter, White Matter, and CSF.
 
 
-*nfa_warp_mask.py*
+**nfa_warp_mask.py**
+
 Purpose: Applies spatial transformations to denoised fMRI data to warp them into a standard MNI space.
 
 Input: Subject IDs, denoised functional MRI data from ICA_AROMA output.
@@ -69,7 +71,7 @@ Output: Warped denoised fMRI data in standard MNI space, saved in specified dire
 Operations: Uses argparse for command-line arguments and subprocess for shell commands. Utilizes FSL's applywarp to perform the warping using predefined warp files.
 
 
-*nfa_fcanalysis.py*
+**nfa_fcanalysis.py**
 
 Purpose: Executes a comprehensive seed-based functional connectivity (FC) analysis on resting-state fMRI datasets for the Meditation Narrative Free Awareness Study. The script targets specific Regions of Interest (ROIs) such as the Anterior Cingulate Cortex (dACC), the Medial Prefrontal Cortex (mpfc), and the Angular Gyrus (AG) among others. It assesses the degree of temporal correlation between these ROIs and every other voxel in the brain across three distinct mental states: "restnotask," "restthink," and "restopen."
 
@@ -90,7 +92,7 @@ Operations:
 * FSL's FEAT: Executes the FEAT (FMRI Expert Analysis Tool) command with the dynamically generated .fsf file to perform the actual FC analysis.
 
 
-*ROI_timeseries.py*
+**ROI_timeseries.py**
 
 Purpose: Gathers time series data for specific ROIs across different mental states ("restnotask," "restopen," "restthink") for each subject in the study.
 
@@ -107,7 +109,7 @@ Operations:
 * Utilizes FSL's fslmeants to extract and save time series data from each ROI.
 
 
-*segmentation_timeseries.py*
+**segmentation_timeseries.py**
 
 Purpose: Extracts time series data from segmented regions (CSF or WM) for various mental states (e.g., "medopen," "medthink," "restnotask") for each subject.
 
@@ -125,7 +127,7 @@ Operations:
 * Generates time series data for the segmented regions specified
 
 
-*copyreg.sh*
+**copyreg.sh**
 
 Purpose: This shell script optimizes the registration process by copying pre-calculated registration matrices and images from a source folder to a destination folder. This avoids redundant calculations for each functional run for the same subject.
 
@@ -143,7 +145,7 @@ Operations:
 - Applies the final warp to map example_func to standard space
 
 
-*featquery.py*
+**featquery.py**
 
 Purpose: This script uses featquery from FSL to extract statistical values for specific brain regions (ROIs) from fMRI data.
 
@@ -160,7 +162,7 @@ featquery 1 /path/to/feat_dir 2 "stats/cope1 stats/cope2" ROI_analysis_mask -p -
 Output: ROI analysis files with statistics, prefixed with ROI_analysis_.
 
 
-*scraper_featquery.py*
+**scraper_featquery.py**
 
 Purpose: Automates data extraction for ROI analysis. Scrapes statistical values from featquery report.
 
